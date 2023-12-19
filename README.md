@@ -2,7 +2,7 @@
 
 ## Installation
 
-To install the My Health Display Mod, follow these steps:
+To install my Health Display Mod, follow these steps:
 
 1. **Download the Mod**:
    - Download the latest version of the Health Display Mod
