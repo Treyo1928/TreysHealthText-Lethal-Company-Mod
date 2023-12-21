@@ -14,7 +14,6 @@ namespace TreysHealthText
             if (playerController != null)
             {
                 // Update the health UI with the player's current health
-                // Assuming 'health' is a publicly accessible property of PlayerControllerB
                 int playerHealth = playerController.health;
                 HUDManager.Instance.UpdateHealthUI(playerHealth, true);
                 Plugin.PluginLogger.LogInfo("UpdatedHealth");

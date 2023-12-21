@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using HarmonyLib;
 
@@ -13,10 +13,14 @@ namespace TreysHealthText
         {
             if (healthText == null)
             {
-                CreateHealthText(__instance, 100); // Initial health value
+                CreateHealthText(__instance, 100, health); // Initial health value
             }
 
-            healthText.text = $"HP\n{health}";
+            // Update the text based on the configuration
+            string hpPosition = Plugin.HpTextPosition.Value;
+            bool underline = Plugin.UnderlineTopLine.Value;
+
+            UpdateHealthText(health);
 
             if (health <= 0)
             {
@@ -25,7 +29,32 @@ namespace TreysHealthText
             }
         }
 
-        private static void CreateHealthText(HUDManager hudManager, int initialHealth)
+        private static void UpdateHealthText(int health)
+        {
+            // Update the text based on the configuration
+            string hpPosition = Plugin.HpTextPosition.Value;
+            bool underline = Plugin.UnderlineTopLine.Value;
+            string labelName = Plugin.HPLabelName.Value;
+            string topText;
+            string bottomText;
+            if (hpPosition.Equals("Above"))
+            {
+                topText = labelName;
+                bottomText = health.ToString();
+            }
+            else
+            {
+                topText = health.ToString();
+                bottomText = labelName;
+            }
+            if (underline)
+            {
+                topText = "<u>" + topText + "</u>";
+            }
+            healthText.text = topText + "\n" + bottomText;
+        }
+
+        private static void CreateHealthText(HUDManager hudManager, int initialHealth, int health)
         {
             // Find the 'TopLeftCorner' GameObject (parent of 'Self')
             GameObject topLeftCorner = GameObject.Find("Systems/UI/Canvas/IngamePlayerHUD/TopLeftCorner");
@@ -85,10 +114,13 @@ namespace TreysHealthText
             rectTransform.anchorMin = new Vector2(0, 1); // Top left anchor
             rectTransform.anchorMax = new Vector2(0, 1); // Top left anchor
             rectTransform.pivot = new Vector2(0, 1); // Top left pivot
-            rectTransform.anchoredPosition = new Vector2(-53, -95); // Adjust position as needed
 
-            // Set initial health text
-            healthText.text = $"HP\n{initialHealth}";
+            //Move the text to a good-looking position
+            int XOffset = Plugin.XOffset.Value;
+            int YOffset = Plugin.YOffset.Value;
+            rectTransform.anchoredPosition = new Vector2(-53 + XOffset, -95 + YOffset);
+
+            UpdateHealthText(health);
         }
     }
 }
