@@ -1,11 +1,11 @@
-# Trey's Health Display Mod
+# Trey's Health Text Mod
 
 ## Installation
 
-To install my Health Display Mod, follow these steps:
+### To install my Health Text Mod, follow these steps:
 
 1. **Download the Mod**:
-   - Download the latest version of the Health Display Mod
+   - Download the latest version of TreysHealthText
 
 2. **Install BepInEx**:
    - If not already installed, download and install BepInEx for Lethal Company.
@@ -16,3 +16,16 @@ To install my Health Display Mod, follow these steps:
 
 4. **Celebrate**:
    - The mod should be working, run the game and have fun :D
+
+## Configuration
+
+#### Navigate to your `BepInEx/config` directory in your Lethal Company installation folder and edit TreysHealthText.cfg in the text editor of your choice.
+
+### These are the config options
+
+- HPTextPosition: Defines if the label should be above or below the number
+- UnderlineTopLine: Separates the top and bottom row with a line
+- HPLabelName: Replaces the "HP" text with whatever you want! You could have your text say "100 men" if you wanted idk.
+- XOffset: Moves the text left and right
+- YOffset: Moves the text up and down
+
