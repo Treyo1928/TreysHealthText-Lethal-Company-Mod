@@ -11,6 +11,7 @@ namespace TreysHealthText
         internal static ConfigEntry<string> HpTextPosition;
         internal static ConfigEntry<bool> UnderlineTopLine;
         internal static ConfigEntry<string> HPLabelName;
+        internal static ConfigEntry<string> TextColor;
         internal static ConfigEntry<int> XOffset;
         internal static ConfigEntry<int> YOffset;
 
@@ -31,6 +32,10 @@ namespace TreysHealthText
                                       "HPLabelName",
                                       "HP",
                                       "Set to whatever label you want for the display, leave blank if you don't want a label.");
+            TextColor = Config.Bind("General",
+                                    "TextColor",
+                                    "243.015, 100.47, 0",
+                                    "Color of the text in RGB format (e.g., '255,0,0' for red).");
             XOffset = Config.Bind("Position",
                                   "XOffset",
                                   0,

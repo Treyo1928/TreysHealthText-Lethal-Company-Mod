@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using TMPro;
 using HarmonyLib;
+using System;
 
 namespace TreysHealthText
 {
@@ -78,7 +79,7 @@ namespace TreysHealthText
                 TextMeshProUGUI weightText = hudManager.weightCounter;
                 healthText.font = weightText.font;
                 healthText.fontSize = weightText.fontSize;
-                healthText.color = weightText.color;
+                healthText.color = ParseColor(Plugin.TextColor.Value);
                 healthText.alignment = TextAlignmentOptions.Center;
                 healthText.enableAutoSizing = weightText.enableAutoSizing;
                 healthText.fontSizeMin = weightText.fontSizeMin;
@@ -121,6 +122,21 @@ namespace TreysHealthText
             rectTransform.anchoredPosition = new Vector2(-53 + XOffset, -95 + YOffset);
 
             UpdateHealthText(health);
+        }
+        private static Color ParseColor(string rgb)
+        {
+            string[] parts = rgb.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length != 3) return Color.white; // Fallback to white
+
+            // Attempt to parse each component
+            if (float.TryParse(parts[0], out float r) &&
+                float.TryParse(parts[1], out float g) &&
+                float.TryParse(parts[2], out float b))
+            {
+                return new Color(r / 255, g / 255, b / 255);
+            }
+
+            return Color.white; // Fallback to white if parsing fails
         }
     }
 }
