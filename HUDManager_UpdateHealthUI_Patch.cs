@@ -12,6 +12,7 @@ namespace TreysHealthText
 
         static void Postfix(HUDManager __instance, int health)
         {
+            Plugin.PluginLogger.LogInfo("UpdateHealthUI Patch Ran");
             if (healthText == null)
             {
                 CreateHealthText(__instance, 100, health); // Initial health value
@@ -23,11 +24,12 @@ namespace TreysHealthText
 
             UpdateHealthText(health);
 
-            if (health <= 0)
+            //Below code deletes the health text, but I don't think that's needed and actually causes lag on level load
+            /*if (health <= 0)
             {
                 GameObject.Destroy(healthText.gameObject);
                 healthText = null;
-            }
+            }*/
         }
 
         private static void UpdateHealthText(int health)
