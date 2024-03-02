@@ -4,7 +4,7 @@ using HarmonyLib;
 
 namespace TreysHealthText
 {
-    [BepInPlugin("TreysHealthText", "TreysHealthText", "1.3.1")]
+    [BepInPlugin("TreysHealthText", "TreysHealthText", "1.3.2")]
     public class Plugin : BaseUnityPlugin
     {
         internal static BepInEx.Logging.ManualLogSource PluginLogger;
