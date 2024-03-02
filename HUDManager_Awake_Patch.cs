@@ -16,7 +16,7 @@ namespace TreysHealthText
             {
                 // Update the health UI with the player's current health
                 int playerHealth = playerController.health;
-                HUDManager.Instance.UpdateHealthUI(playerHealth, false); //Player Intro Skip was caused by second parameter being true
+                HUDManager.Instance.UpdateHealthUI(playerHealth, Plugin.HideSystemsOnline.Value); //Player Intro Skip was caused by second parameter being true
                 Plugin.PluginLogger.LogInfo("UpdatedHealth");
             }
             else

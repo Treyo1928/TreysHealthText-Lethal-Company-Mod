@@ -4,10 +4,11 @@ using HarmonyLib;
 
 namespace TreysHealthText
 {
-    [BepInPlugin(PluginInfo.PLUGIN_GUID, PluginInfo.PLUGIN_NAME, PluginInfo.PLUGIN_VERSION)]
+    [BepInPlugin("TreysHealthText", "TreysHealthText", "1.3.2")]
     public class Plugin : BaseUnityPlugin
     {
         internal static BepInEx.Logging.ManualLogSource PluginLogger;
+        internal static ConfigEntry<bool> HideSystemsOnline;
         internal static ConfigEntry<string> HpTextPosition;
         internal static ConfigEntry<bool> UnderlineTopLine;
         internal static ConfigEntry<string> HPLabelName;
@@ -20,6 +21,10 @@ namespace TreysHealthText
             PluginLogger = Logger;
 
             // Define the configuration options
+            HideSystemsOnline = Config.Bind("General",
+                                         "HideSystemsOnline",
+                                         false,
+                                         "Does Systems Online text pop up when joining lobbies?");
             HpTextPosition = Config.Bind("General",
                                          "HpTextPosition",
                                          "Above",
@@ -45,10 +50,10 @@ namespace TreysHealthText
                                   0,
                                   "Vertical offset for the health text position.");
 
-            Logger.LogInfo($"Plugin {PluginInfo.PLUGIN_GUID} is loaded!");
+            Logger.LogInfo("Plugin TreysHealthText is loaded!");
 
             // Initialize Harmony
-            var harmony = new Harmony(PluginInfo.PLUGIN_GUID);
+            Harmony harmony = new Harmony("TreysHealthText");
             harmony.PatchAll();
 
             Logger.LogInfo("Harmony patches applied.");
