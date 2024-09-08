@@ -8,7 +8,7 @@ namespace TreysHealthText
     [HarmonyPatch(typeof(HUDManager), "UpdateHealthUI")]
     public static class HUDManager_UpdateHealthUI_Patch
     {
-        private static TextMeshProUGUI healthText = null;
+        public static TextMeshProUGUI healthText = null;
 
         static void Postfix(HUDManager __instance, int health)
         {
@@ -22,7 +22,7 @@ namespace TreysHealthText
             string hpPosition = Plugin.HpTextPosition.Value;
             bool underline = Plugin.UnderlineTopLine.Value;
 
-            UpdateHealthText(health);
+            UpdateHealthText(health, false);
 
             //Below code deletes the health text, but I don't think that's needed and actually causes lag on level load
             /*if (health <= 0)
@@ -32,7 +32,7 @@ namespace TreysHealthText
             }*/
         }
 
-        private static void UpdateHealthText(int health)
+        private static void UpdateHealthText(int health, bool rainbow)
         {
             // Update the text based on the configuration
             string hpPosition = Plugin.HpTextPosition.Value;
@@ -40,15 +40,30 @@ namespace TreysHealthText
             string labelName = Plugin.HPLabelName.Value;
             string topText;
             string bottomText;
+            if (rainbow){
+                // Somehow change color of text asset
+                Plugin.PluginLogger.LogInfo("Updated Text Color");
+
+            }
             if (hpPosition.Equals("Above"))
             {
                 topText = labelName;
                 bottomText = health.ToString();
             }
-            else
+            else if (hpPosition.Equals("Below"))
             {
                 topText = health.ToString();
                 bottomText = labelName;
+            }
+            else if (hpPosition.Equals("Right"))
+            {
+                topText = health.ToString() + labelName;
+                bottomText = "";
+            }
+            else
+            {
+                topText = labelName + health.ToString();
+                bottomText = "";
             }
             if (underline)
             {
@@ -123,7 +138,7 @@ namespace TreysHealthText
             int YOffset = Plugin.YOffset.Value;
             rectTransform.anchoredPosition = new Vector2(-53 + XOffset, -95 + YOffset);
 
-            UpdateHealthText(health);
+            UpdateHealthText(health, false);
         }
         private static Color ParseColor(string rgb)
         {
