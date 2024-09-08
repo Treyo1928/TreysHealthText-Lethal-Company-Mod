@@ -32,4 +32,4 @@
 - RainbowText: Set to true if you want the color to change every frame (might cause lag idk)
 - RainbowSpeed: Changes how fast the text updates. Set the value as a float (default 0.3)
 
-## If you find any bugs, you can open an issue on my GitHub linked at the top of the page
+## If you find any bugs, please open an issue
